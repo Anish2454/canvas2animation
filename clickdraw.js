@@ -1,7 +1,14 @@
+/*
+Anish Shenoy
+SoftDev2 pd07
+K02 -- What is it saving the screen from?
+2018-02-08
+*/
 
 /* var toggle = document.getElementById("toggle");
 var clear = document.getElementById("clear");
 var canvas = document.getElementById("canvas"); */
+
 var animateDotButton = document.getElementById("animateDot");
 var animateMovieButton = document.getElementById("animateMovie");
 var stopButton = document.getElementById("stop");
