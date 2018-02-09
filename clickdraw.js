@@ -2,15 +2,21 @@
 /* var toggle = document.getElementById("toggle");
 var clear = document.getElementById("clear");
 var canvas = document.getElementById("canvas"); */
-var animateButton = document.getElementById("animate");
+var animateDotButton = document.getElementById("animateDot");
+var animateMovieButton = document.getElementById("animateMovie");
 var stopButton = document.getElementById("stop");
 var ctx = canvas.getContext("2d");
 var state = 0;
 var first = true;
 var radius = 1;
-var increment= 1;
+var dotIncrement = 1;
 var animating = false;
 var id = null;
+var Xanim = 237;
+var Yanim = 395;
+var increment = 1;
+var dvdXIncrement = 2;
+var dvdYIncrement = 2;
 
 /*
 var toggleButton = function(e){
@@ -71,14 +77,14 @@ var drawDot = function(timestamp){
 	radius += increment;
 	ctx.clearRect(0,0,600,600);
 	ctx.beginPath();
-  ctx.arc(300, 300, radius, 0, Math.PI * 2, true);
+  ctx.arc(200, 300, radius, 0, Math.PI * 2, true);
   ctx.fill();
 	id = window.requestAnimationFrame(drawDot);
 };
 
-var animateButtonFunc = function(e){
-	ctx.fillStyle = "green";
+var animateDotButtonFunc = function(e){
 	if (!animating){
+		ctx.fillStyle = "green";
 		animating = true;
 		id = window.requestAnimationFrame(drawDot);
 	}
@@ -89,10 +95,31 @@ var stopFunc = function(e){
 	ctx.clearRect(0,0,600,600);
 	id = null;
 	animating = false;
-}
+};
+
+var movieBounce = function(timestamp){
+	if (Xanim <= 25 || Xanim >= 400 - 25) dvdXIncrement *= -1;
+	if (Yanim <= 25 || Yanim >= 600 - 25) dvdYIncrement *= -1;
+	Xanim += dvdXIncrement;
+	Yanim += dvdYIncrement;
+	ctx.clearRect(0,0,600,600);
+	ctx.beginPath();
+  ctx.arc(Xanim, Yanim, 25, 0, Math.PI * 2, true);
+  ctx.fill();
+	id = window.requestAnimationFrame(movieBounce);
+};
+
+var animateMovieButtonFunc = function(e){
+	if (!animating){
+		ctx.fillStyle = "blue";
+		animating = true;
+		id = window.requestAnimationFrame(movieBounce);
+	}
+};
 // var drawFuncs = [drawRedCircle, drawBlueSquare];
 //toggle.addEventListener("click", toggleButton);
 //canvas.addEventListener("click", pickFunc);
-animateButton.addEventListener("click", animateButtonFunc);
+animateDotButton.addEventListener("click", animateDotButtonFunc);
+animateMovieButton.addEventListener("click", animateMovieButtonFunc);
 stopButton.addEventListener("click", stopFunc);
 //clear.addEventListener("click", clearButton);
