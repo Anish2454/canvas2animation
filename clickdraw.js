@@ -84,8 +84,8 @@ var drawDot = function(timestamp){
 	radius += increment;
 	ctx.clearRect(0,0,600,600);
 	ctx.beginPath();
-  ctx.arc(200, 300, radius, 0, Math.PI * 2, true);
-  ctx.fill();
+  	ctx.arc(200, 300, radius, 0, Math.PI * 2, true);
+  	ctx.fill();
 	id = window.requestAnimationFrame(drawDot);
 };
 
@@ -105,14 +105,18 @@ var stopFunc = function(e){
 };
 
 var movieBounce = function(timestamp){
-	if (Xanim <= 25 || Xanim >= 400 - 25) dvdXIncrement *= -1;
-	if (Yanim <= 25 || Yanim >= 600 - 25) dvdYIncrement *= -1;
+	if (Xanim <= 0 || Xanim >= 400 - 100) dvdXIncrement *= -1;
+	if (Yanim <= 0 - 20 || Yanim >= 600 - 80) dvdYIncrement *= -1;
 	Xanim += dvdXIncrement;
 	Yanim += dvdYIncrement;
 	ctx.clearRect(0,0,600,600);
+	var logo = new Image();
+	logo.src = "logo.png";
+	ctx.drawImage(logo, Xanim, Yanim, 100, 100);
+	/*
 	ctx.beginPath();
-  ctx.arc(Xanim, Yanim, 25, 0, Math.PI * 2, true);
-  ctx.fill();
+  	ctx.arc(Xanim, Yanim, 25, 0, Math.PI * 2, true);
+  	ctx.fill(); */
 	id = window.requestAnimationFrame(movieBounce);
 };
 
